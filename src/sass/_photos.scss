@@ -1,0 +1,60 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: none;
+}
+
+body {
+  background-color: darkslategray;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  padding: 20px;
+  max-width: 2000px;
+}
+
+.search-form {
+  display: flex;
+  justify-content: center;
+  height: 40px;
+  margin-bottom: 20px;
+  border-radius: 40%;
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.photo {
+  transition: box-shadow 0.5s, transform 0.5s;
+  position: relative;
+  z-index: 0;
+  width: 100%;
+}
+
+.photo-card {
+  width: calc(100% / 5 - 10px);
+  min-width: 300px;
+  background-color: aliceblue;
+  border-radius: 5px;
+}
+
+.info {
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+  display: flex;
+  gap: 10px;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
