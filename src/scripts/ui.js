@@ -1,12 +1,16 @@
 import pingPixabay from './pixabay.js';
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
+import Notiflix from 'notiflix';
+
+export let gallery;
+export let photoContainer;
 
 const getPhotoElement = photo => {
-  //   const img = document.createElement('img');
-  //   img.classList.add('photo');
-  //   img.src = photo.webformatURL;
-  //   console.log(img);
   const photoCard = `<div class="photo-card">
+  <a class="gallery__item" href="${photo.largeImageURL}">
     <img class="photo" src="${photo.webformatURL}" alt="" loading="lazy" />
+    </a>
     <div class="info">
       <p class="info-item">
         <b>Likes</b> ${photo.likes}
@@ -23,21 +27,30 @@ const getPhotoElement = photo => {
     </div>
   </div>
   `;
-  //   console.log(photoCard);
 
   return photoCard;
-  //   return img;
 };
 
 function drawPhotos({ photos, page }) {
-  const photoContainer = document.querySelector('#gallery');
+  photoContainer = document.querySelector('#gallery');
+
   if (page === '1') {
     photoContainer.innerHTML = '';
   }
+  if (photos[0] === undefined) {
+    Notiflix.Notify.failure(
+      'Sorry, there are no images matching your search query. Please try again.'
+    );
+    return;
+  } else {
+    Notiflix.Notify.success(`Hooray! We found ${photos.length} images`);
+    gallery = photos.map(getPhotoElement);
+    photoContainer.innerHTML += gallery.join('');
+  }
 
-  const children = photos.map(getPhotoElement);
-  //   console.log(children.join(''));
-  photoContainer.innerHTML += children.join('');
+  new SimpleLightbox('.gallery a', {
+    captionDelay: 250,
+  });
 }
 
 export async function loadPhotos({ q, page }) {
@@ -46,6 +59,6 @@ export async function loadPhotos({ q, page }) {
     alert(photos.error);
     return;
   }
+
   drawPhotos({ photos, page });
-  return;
 }

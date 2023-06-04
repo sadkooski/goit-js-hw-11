@@ -19,6 +19,7 @@ export default async function pingPixabay({ q = '', page = '1' }) {
     }
 
     const { hits: photos } = await response.json();
+    console.log('2', photos);
 
     return photos;
   } catch (e) {
