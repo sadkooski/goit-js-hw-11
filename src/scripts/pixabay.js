@@ -11,16 +11,16 @@ export default async function pingPixabay({ q = '', page = '1' }) {
     });
 
     const response = await axios.get(`${API_PATH}?${querystring}`);
+
     if (!response.ok) {
       if (response.status === 400) {
         return [];
       }
     }
     const photos = response.data.hits;
-    totalHits = response.data.totalHits;
+    totalHits = response.data.total;
 
-    console.log(totalHits);
-    console.log('2', photos);
+    console.log(photos);
     return photos;
   } catch (e) {
     return { error: e.toString() };
