@@ -5,6 +5,7 @@ import Notiflix from 'notiflix';
 
 export let gallery;
 export let photoContainer;
+import { totalHits } from './pixabay.js';
 
 const getPhotoElement = photo => {
   const photoCard = `<div class="photo-card">
@@ -43,7 +44,7 @@ function drawPhotos({ photos, page }) {
     );
     return;
   } else {
-    Notiflix.Notify.success(`Hooray! We found ${photos.length} images`);
+    Notiflix.Notify.success(`Hooray! We found ${totalHits} images`);
     gallery = photos.map(getPhotoElement);
     photoContainer.innerHTML += gallery.join('');
   }
