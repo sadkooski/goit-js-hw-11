@@ -56,6 +56,7 @@ function drawPhotos({ photos, page }) {
 
 export async function loadPhotos({ q, page }) {
   const photos = await pingPixabay({ q, page });
+
   if (photos.error) {
     alert(photos.error);
     return;
